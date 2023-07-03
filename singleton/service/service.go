@@ -1,5 +1,22 @@
 package service
 
+import "log"
+
+// Singleton Service
+
+type IdServiceSingleton struct {
+	idService *IdService
+}
+
+func (s *IdServiceSingleton) GetService() *IdService {
+	if s.idService == nil {
+		log.Print("no id service available, instantiation")
+		s.idService = NewIdService()
+	}
+	return s.idService
+}
+
+// ID Service
 type IdService struct {
 	counter int
 }
